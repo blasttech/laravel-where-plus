@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 /**
  * Trait WherePlusTrait
  *
- * @method \Illuminate\Database\Eloquent\Builder whereOrEmptyOrNull($field_name, $value = '', $ignore = null)
+ * @method Builder whereOrEmptyOrNull($field_name, $value = '', $ignore = null)
  *
  * @package Blasttech\WherePlus
  */
@@ -32,7 +32,7 @@ trait WherePlusTrait
      * If $value = '' add where ($column is null or column = '') statement
      * If $value != '' add where $column = $value statement
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param string|array $column
      * @param string $value
      * @param string $ignore - if value = ignore, don't search on this column
