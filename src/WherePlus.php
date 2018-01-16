@@ -13,7 +13,7 @@ interface WherePlus
      *
      * @return \Illuminate\Database\Query\Builder
      */
-    public function scopeWhereOrEmptyOrNull(Builder $query);
+    public function scopeWhereOrEmptyOrNull(Builder $query, $column, $value = '', $ignore = null);
 
     /**
      * Scope a query to only include records where $value in $column
@@ -22,7 +22,7 @@ interface WherePlus
      *
      * @return \Illuminate\Database\Query\Builder
      */
-    public function scopeWhereInColumn(Builder $query);
+    public function scopeWhereInColumn(Builder $query, $column, $value);
 
     /**
      * Scope a query to exclude records where $value in $column
@@ -31,5 +31,5 @@ interface WherePlus
      *
      * @return \Illuminate\Database\Query\Builder
      */
-    public function scopeWhereNotInColumn(Builder $query);
+    public function scopeWhereNotInColumn(Builder $query, $column, $value);
 }

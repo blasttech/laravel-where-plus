@@ -38,7 +38,7 @@ trait WherePlusTrait
      * @param string $ignore - if value = ignore, don't search on this column
      * @return \Illuminate\Database\Query\Builder
      */
-    public function scopeWhereOrEmptyOrNull($query, $column, $value = '', $ignore = null)
+    public function scopeWhereOrEmptyOrNull(Builder $query, $column, $value = '', $ignore = null)
     {
         if (is_array($column)) {
             foreach ($column as $where_col => $where_val) {
@@ -69,7 +69,7 @@ trait WherePlusTrait
      * @param string $value
      * @return Builder
      */
-    public function scopeWhereInColumn($query, $column, $value)
+    public function scopeWhereInColumn(Builder $query, $column, $value)
     {
         return $query->whereRaw('CONCAT(\',\', ' . $this->addTicks($column) . ', \',\') LIKE \'%,' . $value . ',%\'');
     }
@@ -82,7 +82,7 @@ trait WherePlusTrait
      * @param string $value
      * @return Builder
      */
-    public function scopeWhereNotInColumn($query, $column, $value)
+    public function scopeWhereNotInColumn(Builder $query, $column, $value)
     {
         return $query->whereRaw(
             'CONCAT(\',\', ' . $this->addTicks($column) . ', \',\') NOT LIKE \'%,' . $value . ',%\''
