@@ -1,8 +1,10 @@
-# eloquent-extended
+# laravel-where-plus
 Extra where scopes for Laravel Models
 
 Functions:
 * whereOrEmptyOrNull($column, $value, $ignore)
+* whereInColumn($column, $value)
+* whereNotInColumn($column, $value)
 
 ## whereOrEmptyOrNull
 This adds a where condition for when a $column should be equal to $value, but not equal to a $ignore
@@ -30,3 +32,27 @@ This can also be run with an array of columns, e.g.:
       ], '', '');
 ```
 which would add where statements for Country, State and Locality if the input fields weren't empty.
+
+## whereInColumn
+This adds a where condition to only include records where $value is in $column. The value of $column should be a comma delimited list.
+
+For example:
+```
+  $query->whereInColumn('Country', 'Australia');
+```
+In SQL, this would be the equivalent of:
+```
+  WHERE CONCAT(',', '`Country`', '`') LIKE '%,Australia,%'
+```
+
+## whereNotInColumn
+This adds a where condition to only include records where $value is not in $column. The value of $column should be a comma delimited list.
+
+For example:
+```
+  $query->whereNotInColumn('Country', 'Australia');
+```
+In SQL, this would be the equivalent of:
+```
+  WHERE CONCAT(',', '`Country`', '`') NOT LIKE '%,Australia,%'
+```
