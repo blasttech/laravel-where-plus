@@ -42,7 +42,7 @@ For example:
 ```
 In SQL, this would be the equivalent of:
 ```
-  WHERE CONCAT(',', '`Country`', '`') LIKE '%,Australia,%'
+  WHERE CONCAT(',', `Country`, ',') LIKE '%,Australia,%'
 ```
 
 ## whereNotInColumn
@@ -54,5 +54,5 @@ For example:
 ```
 In SQL, this would be the equivalent of:
 ```
-  WHERE CONCAT(',', '`Country`', '`') NOT LIKE '%,Australia,%'
+  WHERE CONCAT(',', `Country`, ',') NOT LIKE '%,Australia,%'
 ```
