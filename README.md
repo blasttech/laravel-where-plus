@@ -1,9 +1,7 @@
 # eloquent-extended
-Extra functionality for Laravel Eloquent Classes
+Extra where scopes for Laravel Models
 
 Functions:
-* modelJoin - creates a join for an Eloquent relation 
-* orderByCustom - sorts by a custom relationship
 * whereOrEmptyOrNull($column, $value, $ignore)
 
 ## whereOrEmptyOrNull
