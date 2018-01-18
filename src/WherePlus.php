@@ -4,6 +4,15 @@ namespace Blasttech\WherePlus;
 
 use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * Interface WherePlus
+ *
+ * @method Builder whereOrEmptyOrNull(Builder $query, $column, $value = '', $ignore = null)
+ * @method Builder whereInColumn(Builder $query, $column, $value)
+ * @method Builder whereNotInColumn(Builder $query, $column, $value)
+ *
+ * @package Blasttech\WherePlus
+ */
 interface WherePlus
 {
     /**
