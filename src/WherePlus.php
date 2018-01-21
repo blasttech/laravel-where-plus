@@ -7,10 +7,6 @@ use Illuminate\Database\Eloquent\Builder;
 /**
  * Interface WherePlus
  *
- * @method Builder whereOrEmptyOrNull($column, $value = '', $ignore = null)
- * @method Builder whereInColumn($column, $value)
- * @method Builder whereNotInColumn($column, $value)
- *
  * @package Blasttech\WherePlus
  */
 interface WherePlus
