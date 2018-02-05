@@ -88,4 +88,82 @@ trait WherePlusTrait
             'CONCAT(\',\', ' . $this->addTicks($column) . ', \',\') NOT LIKE \'%,' . $value . ',%\''
         );
     }
+
+    /**
+     * Scope a query to only include records where $column starts with $value
+     *
+     * @param Builder $query
+     * @param string $column
+     * @param string $value
+     * @return Builder
+     */
+    public function scopeWhereStarts(Builder $query, $column, $value)
+    {
+        return $query->where($column, 'LIKE', $value . '%');
+    }
+
+    /**
+     * Scope a query to only include records where $column doesn't start with $value
+     *
+     * @param Builder $query
+     * @param string $column
+     * @param string $value
+     * @return Builder
+     */
+    public function scopeWhereNotStarts(Builder $query, $column, $value)
+    {
+        return $query->where($column, 'NOT LIKE', $value . '%');
+    }
+
+    /**
+     * Scope a query to only include records where $column ends with $value
+     *
+     * @param Builder $query
+     * @param string $column
+     * @param string $value
+     * @return Builder
+     */
+    public function scopeWhereEnds(Builder $query, $column, $value)
+    {
+        return $query->where($column, 'LIKE', '%' . $value);
+    }
+
+    /**
+     * Scope a query to only include records where $column doesn't end with $value
+     *
+     * @param Builder $query
+     * @param string $column
+     * @param string $value
+     * @return Builder
+     */
+    public function scopeWhereNotEnds(Builder $query, $column, $value)
+    {
+        return $query->where($column, 'NOT LIKE', '%' . $value);
+    }
+
+    /**
+     * Scope a query to only include records where $column contains $value
+     *
+     * @param Builder $query
+     * @param string $column
+     * @param string $value
+     * @return Builder
+     */
+    public function scopeWhereContains(Builder $query, $column, $value)
+    {
+        return $query->where($column, 'LIKE', '%' . $value . '%');
+    }
+
+    /**
+     * Scope a query to only include records where $column doesn't contain $value
+     *
+     * @param Builder $query
+     * @param string $column
+     * @param string $value
+     * @return Builder
+     */
+    public function scopeWhereNotContains(Builder $query, $column, $value)
+    {
+        return $query->where($column, 'NOT LIKE', '%' . $value . '%');
+    }
 }
