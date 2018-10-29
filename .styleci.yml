@@ -7,4 +7,6 @@ disabled:
   - unalign_equals
   - align_phpdoc
   - phpdoc_align
+  - phpdoc_no_package
+  - phpdoc_summary
   - concat_without_spaces
