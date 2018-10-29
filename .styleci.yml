@@ -1,3 +1,13 @@
-preset: psr2
+preset: recommended
 
-linting: true
+risky: false
+
+disabled:
+  - align_double_arrow
+  - align_phpdoc
+  - concat_without_spaces
+  - phpdoc_align
+  - phpdoc_no_package
+  - phpdoc_single_line_var_spacing
+  - phpdoc_summary
+  - unalign_equals

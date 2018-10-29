@@ -8,23 +8,23 @@ Functions:
 
 ## whereOrEmptyOrNull
 This adds a where condition for when a $column should be equal to $value, but not equal to a $ignore
-```
+```php
   $query->whereOrEmptyOrNull('Country', $input['country'], '');
 ```
 If $input['country'] is not equal to '' then this will be the equivalent of:
-```
+```php
   $query->where('Country', $input['country']);
 ```
 Otherwise if $input['country'] === '' then a where statement isn't added. 
 
 Likewise, a default value could be added, eg. 
-```
+```php
 $query->whereOrEmptyOrNull('Country', $input['country'], 'Australia');
 ```
 If you wanted to only add a where statement when $input['country'] isn't 'Australia'.
 
 This can also be run with an array of columns, e.g.:
-```
+```php
   $query->whereOrEmptyOrNull([
           'Country' => $input['country'],
           'State' => $input['state'],
@@ -37,11 +37,11 @@ which would add where statements for Country, State and Locality if the input fi
 This adds a where condition to only include records where $value is in $column. The value of $column should be a comma delimited list.
 
 For example:
-```
+```php
   $query->whereInColumn('Country', 'Australia');
 ```
 In SQL, this would be the equivalent of:
-```
+```sql
   WHERE CONCAT(',', `Country`, ',') LIKE '%,Australia,%'
 ```
 
@@ -49,10 +49,34 @@ In SQL, this would be the equivalent of:
 This adds a where condition to only include records where $value is not in $column. The value of $column should be a comma delimited list.
 
 For example:
-```
+```php
   $query->whereNotInColumn('Country', 'Australia');
 ```
 In SQL, this would be the equivalent of:
-```
+```sql
   WHERE CONCAT(',', `Country`, ',') NOT LIKE '%,Australia,%'
+```
+
+## Aggregates
+
+### Available scopes
+- addCount
+- addSum
+- addAvg
+- addMin
+- addMax
+
+### Example
+```php
+Calls::make()
+  ->select(['calltype'])
+  ->addCount('id')
+  ->addSum(['seconds', 'charge'])
+  ->groupBy(['calltype']);
+```
+In SQL, this would be the equivalent of:
+```sql
+  select calltype, count(id), sum(seconds), sum(charge) 
+    from calls 
+   group by calltype
 ```
