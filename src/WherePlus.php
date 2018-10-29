@@ -51,6 +51,7 @@ interface WherePlus
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereStarts(Builder $query, $column, $value);
@@ -61,6 +62,7 @@ interface WherePlus
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereNotStarts(Builder $query, $column, $value);
@@ -71,6 +73,7 @@ interface WherePlus
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereEnds(Builder $query, $column, $value);
@@ -81,6 +84,7 @@ interface WherePlus
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereNotEnds(Builder $query, $column, $value);
@@ -91,6 +95,7 @@ interface WherePlus
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereContains(Builder $query, $column, $value);
@@ -101,6 +106,7 @@ interface WherePlus
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereNotContains(Builder $query, $column, $value);
