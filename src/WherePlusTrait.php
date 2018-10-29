@@ -3,7 +3,6 @@
 namespace Blasttech\WherePlus;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Trait WherePlusTrait
@@ -166,95 +165,5 @@ trait WherePlusTrait
     public function scopeWhereNotContains(Builder $query, $column, $value)
     {
         return $query->where($column, 'NOT LIKE', '%' . $value . '%');
-    }
-
-    /**
-     * @param Builder $query
-     * @param string|string[] $fields
-     * @return Builder
-     */
-    public function scopeAddSum($query, $fields)
-    {
-        if (!is_array($fields)) {
-            $fields = [$fields];
-        }
-
-        foreach ($fields as $field) {
-            $query->addSelect(DB::raw("SUM({$field}) as {$field}"));
-        }
-
-        return $query;
-    }
-
-    /**
-     * @param Builder $query
-     * @param string|string[] $fields
-     * @return Builder
-     */
-    public function scopeAddCount($query, $fields)
-    {
-        if (!is_array($fields)) {
-            $fields = [$fields];
-        }
-
-        foreach ($fields as $field) {
-            $query->addSelect(DB::raw("COUNT({$field}) as {$field}"));
-        }
-
-        return $query;
-    }
-
-    /**
-     * @param Builder $query
-     * @param string|string[] $fields
-     * @return Builder
-     */
-    public function scopeAddMax($query, $fields)
-    {
-        if (!is_array($fields)) {
-            $fields = [$fields];
-        }
-
-        foreach ($fields as $field) {
-            $query->addSelect(DB::raw("MAX({$field}) as {$field}"));
-        }
-
-        return $query;
-    }
-
-    /**
-     * @param Builder $query
-     * @param string|string[] $fields
-     * @return Builder
-     */
-    public function scopeAddMin($query, $fields)
-    {
-        if (!is_array($fields)) {
-            $fields = [$fields];
-        }
-
-        foreach ($fields as $field) {
-            $query->addSelect(DB::raw("MIN({$field}) as {$field}"));
-        }
-
-        return $query;
-    }
-
-    /**
-     * @param Builder $query
-     * @param string|string[] $fields
-     * @return Builder
-     */
-    public function scopeAddAvg($query, $fields)
-    {
-        if (!is_array($fields)) {
-            $fields = [$fields];
-        }
-
-        foreach ($fields as $field) {
-            $query->addSelect(DB::raw("AVG({$field}) as {$field}"));
-        }
-
-        return $query;
     }
 }
