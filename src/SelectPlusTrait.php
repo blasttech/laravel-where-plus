@@ -3,6 +3,7 @@
 namespace Blasttech\WherePlus;
 
 use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -18,108 +19,86 @@ use Illuminate\Support\Facades\DB;
  */
 trait SelectPlusTrait
 {
+    protected function addAggregation($query, $op, $field, $alias)
+    {
+        $alias = $alias ?: $field;
+
+        if ($field instanceof Expression) {
+            $field = $field->getValue();
+        }
+
+        $query->addSelect(DB::raw("{$op}({$field}) as {$alias}"));
+
+        return $query;
+    }
+
     /**
      * Add sum to the query
      *
-     * @param Builder $query
-     * @param string|string[] $fields
+     * @param $this $query
+     * @param string $field
+     * @param string $alias
      *
-     * @return Builder
+     * @return $this
      */
-    public function scopeAddSum($query, $fields)
+    public function scopeAddSum($query, $field, $alias = '')
     {
-        if (!is_array($fields)) {
-            $fields = [$fields];
-        }
-
-        foreach ($fields as $field) {
-            $query->addSelect(DB::raw("SUM({$field}) as {$field}"));
-        }
-
-        return $query;
+        return $this->addAggregation($query, 'SUM', $field, $alias);
     }
 
     /**
      * Add count to the query
      *
      * @param Builder $query
-     * @param string|string[] $fields
+     * @param string $field
+     * @param string $alias
      *
-     * @return Builder
+     * @return $this
      */
-    public function scopeAddCount($query, $fields)
+    public function scopeAddCount($query, $field, $alias = '')
     {
-        if (!is_array($fields)) {
-            $fields = [$fields];
-        }
-
-        foreach ($fields as $field) {
-            $query->addSelect(DB::raw("COUNT({$field}) as {$field}"));
-        }
-
-        return $query;
+        return $this->addAggregation($query, 'COUNT', $field, $alias);
     }
 
     /**
      * Add max to the query
      *
      * @param Builder $query
-     * @param string|string[] $fields
+     * @param string $field
+     * @param string $alias
      *
-     * @return Builder
+     * @return $this
      */
-    public function scopeAddMax($query, $fields)
+    public function scopeAddMax($query, $field, $alias = '')
     {
-        if (!is_array($fields)) {
-            $fields = [$fields];
-        }
-
-        foreach ($fields as $field) {
-            $query->addSelect(DB::raw("MAX({$field}) as {$field}"));
-        }
-
-        return $query;
+        return $this->addAggregation($query, 'MAX', $field, $alias);
     }
 
     /**
      * Add min to the query
      *
      * @param Builder $query
-     * @param string|string[] $fields
+     * @param string $field
+     * @param string $alias
      *
-     * @return Builder
+     * @return $this
      */
-    public function scopeAddMin($query, $fields)
+    public function scopeAddMin($query, $field, $alias = '')
     {
-        if (!is_array($fields)) {
-            $fields = [$fields];
-        }
-
-        foreach ($fields as $field) {
-            $query->addSelect(DB::raw("MIN({$field}) as {$field}"));
-        }
-
-        return $query;
+        return $this->addAggregation($query, 'MIN', $field, $alias);
     }
 
     /**
      * Add avg to the query
      *
      * @param Builder $query
-     * @param string|string[] $fields
+     * @param string $field
+     * @param string $alias
      *
-     * @return Builder
+     * @return $this
      */
-    public function scopeAddAvg($query, $fields)
+    public function scopeAddAvg($query, $field, $alias = '')
     {
-        if (!is_array($fields)) {
-            $fields = [$fields];
-        }
-
-        foreach ($fields as $field) {
-            $query->addSelect(DB::raw("AVG({$field}) as {$field}"));
-        }
-
-        return $query;
+        return $this->addAggregation($query, 'AVG', $field, $alias);
     }
 }
