@@ -5,18 +5,17 @@ namespace Blasttech\WherePlus;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * Trait WherePlusTrait
+ * Trait WherePlusTrait.
  *
  * @method Builder whereOrEmptyOrNull($field_name, $value = '', $ignore = null)
- *
- * @package Blasttech\WherePlus
  */
 trait WherePlusTrait
 {
     /**
-     * Add ticks to a table and column
+     * Add ticks to a table and column.
      *
      * @param string $column
+     *
      * @return string
      */
     private function addTicks($column)
@@ -30,12 +29,13 @@ trait WherePlusTrait
 
     /**
      * If $value = '' add where ($column is null or column = '') statement
-     * If $value != '' add where $column = $value statement
+     * If $value != '' add where $column = $value statement.
      *
      * @param Builder $query
      * @param string|array $column
      * @param string $value
      * @param string $ignore - if value = ignore, don't search on this column
+     *
      * @return \Illuminate\Database\Query\Builder
      */
     public function scopeWhereOrEmptyOrNull(Builder $query, $column, $value = '', $ignore = null)
@@ -48,7 +48,7 @@ trait WherePlusTrait
             if (!is_null($ignore) && $value != $ignore) {
                 if ($value == '') {
                     $query->where(function ($query) use ($column) {
-                        /** @var Builder $query */
+                        /* @var Builder $query */
                         $query->where($column, '')
                             ->orWhereNull($column);
                     });
@@ -62,11 +62,12 @@ trait WherePlusTrait
     }
 
     /**
-     * Scope a query to only include records where $value in $column
+     * Scope a query to only include records where $value in $column.
      *
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereInColumn(Builder $query, $column, $value)
@@ -75,11 +76,12 @@ trait WherePlusTrait
     }
 
     /**
-     * Scope a query to exclude records where $value in $column
+     * Scope a query to exclude records where $value in $column.
      *
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereNotInColumn(Builder $query, $column, $value)
@@ -90,11 +92,12 @@ trait WherePlusTrait
     }
 
     /**
-     * Scope a query to only include records where $column starts with $value
+     * Scope a query to only include records where $column starts with $value.
      *
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereStarts(Builder $query, $column, $value)
@@ -103,11 +106,12 @@ trait WherePlusTrait
     }
 
     /**
-     * Scope a query to only include records where $column doesn't start with $value
+     * Scope a query to only include records where $column doesn't start with $value.
      *
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereNotStarts(Builder $query, $column, $value)
@@ -116,11 +120,12 @@ trait WherePlusTrait
     }
 
     /**
-     * Scope a query to only include records where $column ends with $value
+     * Scope a query to only include records where $column ends with $value.
      *
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereEnds(Builder $query, $column, $value)
@@ -129,11 +134,12 @@ trait WherePlusTrait
     }
 
     /**
-     * Scope a query to only include records where $column doesn't end with $value
+     * Scope a query to only include records where $column doesn't end with $value.
      *
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereNotEnds(Builder $query, $column, $value)
@@ -142,11 +148,12 @@ trait WherePlusTrait
     }
 
     /**
-     * Scope a query to only include records where $column contains $value
+     * Scope a query to only include records where $column contains $value.
      *
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereContains(Builder $query, $column, $value)
@@ -155,11 +162,12 @@ trait WherePlusTrait
     }
 
     /**
-     * Scope a query to only include records where $column doesn't contain $value
+     * Scope a query to only include records where $column doesn't contain $value.
      *
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereNotContains(Builder $query, $column, $value)
