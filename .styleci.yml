@@ -5,7 +5,6 @@ risky: false
 disabled:
   - align_double_arrow
   - unalign_equals
-  - align_comments
   - align_phpdoc
   - phpdoc_align
   - phpdoc_annotation_without_dot
