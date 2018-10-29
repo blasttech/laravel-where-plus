@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\DB;
 trait SelectPlusTrait
 {
     /**
+     * Add sum to the query
+     *
      * @param Builder $query
      * @param string|string[] $fields
      *
@@ -38,6 +40,8 @@ trait SelectPlusTrait
     }
 
     /**
+     * Add count to the query
+     *
      * @param Builder $query
      * @param string|string[] $fields
      *
@@ -57,6 +61,8 @@ trait SelectPlusTrait
     }
 
     /**
+     * Add max to the query
+     *
      * @param Builder $query
      * @param string|string[] $fields
      *
@@ -76,6 +82,8 @@ trait SelectPlusTrait
     }
 
     /**
+     * Add min to the query
+     *
      * @param Builder $query
      * @param string|string[] $fields
      *
@@ -95,6 +103,8 @@ trait SelectPlusTrait
     }
 
     /**
+     * Add avg to the query
+     *
      * @param Builder $query
      * @param string|string[] $fields
      *

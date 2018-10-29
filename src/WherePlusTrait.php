@@ -58,7 +58,7 @@ trait WherePlusTrait
             if (!is_null($ignore) && $value != $ignore) {
                 if ($value == '') {
                     $query->where(function ($query) use ($column) {
-                        /** @var Builder $query */
+                        /* @var Builder $query */
                         $query->where($column, '')
                             ->orWhereNull($column);
                     });
