@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\DB;
 /**
  * Trait SelectPlusTrait
  *
- * @method Builder addSum(string|string[] $fields)
- * @method Builder addCount(string|string[] $fields)
- * @method Builder addMax(string|string[] $fields)
- * @method Builder addMin(string|string[] $fields)
- * @method Builder addAvg(string|string[] $fields)
+ * @method $this addSum(string|string[] $fields)
+ * @method $this addCount(string|string[] $fields)
+ * @method $this addMax(string|string[] $fields)
+ * @method $this addMin(string|string[] $fields)
+ * @method $this addAvg(string|string[] $fields)
  *
  * @package Blasttech\WherePlus
  */

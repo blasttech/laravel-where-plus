@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Builder;
 /**
  * Trait WherePlusTrait
  *
- * @method Builder whereOrEmptyOrNull(string $column, string $value = '', string $ignore = null)
- * @method Builder whereInColumn(string $column, string $value)
- * @method Builder whereNotInColumn(string $column, string $value)
- * @method Builder whereStarts(string $column, string $value)
- * @method Builder whereNotStarts(string $column, string $value)
- * @method Builder whereEnds(string $column, string $value)
- * @method Builder whereNotEnds(string $column, string $value)
- * @method Builder whereContains(string $column, string $value)
- * @method Builder whereNotContains(string $column, string $value)
+ * @method $this whereOrEmptyOrNull(string $column, string $value = '', string $ignore = null)
+ * @method $this whereInColumn(string $column, string $value)
+ * @method $this whereNotInColumn(string $column, string $value)
+ * @method $this whereStarts(string $column, string $value)
+ * @method $this whereNotStarts(string $column, string $value)
+ * @method $this whereEnds(string $column, string $value)
+ * @method $this whereNotEnds(string $column, string $value)
+ * @method $this whereContains(string $column, string $value)
+ * @method $this whereNotContains(string $column, string $value)
  *
  * @package Blasttech\WherePlus
  */
