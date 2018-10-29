@@ -5,9 +5,9 @@ risky: false
 disabled:
   - align_double_arrow
   - align_phpdoc
-  - blank_line_before_return
   - concat_without_spaces
   - phpdoc_align
   - phpdoc_no_package
+  - phpdoc_single_line_var_spacing
   - phpdoc_summary
   - unalign_equals
