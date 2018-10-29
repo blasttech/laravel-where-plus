@@ -6,21 +6,20 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Trait SelectPlusTrait
+ * Trait SelectPlusTrait.
  *
  * @method Builder addSum(string|string[] $fields)
  * @method Builder addCount(string|string[] $fields)
  * @method Builder addMax(string|string[] $fields)
  * @method Builder addMin(string|string[] $fields)
  * @method Builder addAvg(string|string[] $fields)
- *
- * @package Blasttech\WherePlus
  */
 trait SelectPlusTrait
 {
     /**
-     * @param Builder $query
+     * @param Builder         $query
      * @param string|string[] $fields
+     *
      * @return Builder
      */
     public function scopeAddSum($query, $fields)
@@ -37,8 +36,9 @@ trait SelectPlusTrait
     }
 
     /**
-     * @param Builder $query
+     * @param Builder         $query
      * @param string|string[] $fields
+     *
      * @return Builder
      */
     public function scopeAddCount($query, $fields)
@@ -55,8 +55,9 @@ trait SelectPlusTrait
     }
 
     /**
-     * @param Builder $query
+     * @param Builder         $query
      * @param string|string[] $fields
+     *
      * @return Builder
      */
     public function scopeAddMax($query, $fields)
@@ -73,8 +74,9 @@ trait SelectPlusTrait
     }
 
     /**
-     * @param Builder $query
+     * @param Builder         $query
      * @param string|string[] $fields
+     *
      * @return Builder
      */
     public function scopeAddMin($query, $fields)
@@ -91,8 +93,9 @@ trait SelectPlusTrait
     }
 
     /**
-     * @param Builder $query
+     * @param Builder         $query
      * @param string|string[] $fields
+     *
      * @return Builder
      */
     public function scopeAddAvg($query, $fields)
