@@ -5,16 +5,14 @@ namespace Blasttech\WherePlus;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * Trait WherePlusTrait
+ * Trait WherePlusTrait.
  *
  * @method Builder whereOrEmptyOrNull($field_name, $value = '', $ignore = null)
- *
- * @package Blasttech\WherePlus
  */
 trait WherePlusTrait
 {
     /**
-     * Add ticks to a table and column
+     * Add ticks to a table and column.
      *
      * @param string $column
      * @return string
@@ -22,7 +20,7 @@ trait WherePlusTrait
     private function addTicks($column)
     {
         if (preg_match('/^[0-9a-zA-Z\.]*$/', $column)) {
-            return '`' . str_replace(['`', '.'], ['', '`.`'], $column) . '`';
+            return '`'.str_replace(['`', '.'], ['', '`.`'], $column).'`';
         } else {
             return $column;
         }
@@ -30,7 +28,7 @@ trait WherePlusTrait
 
     /**
      * If $value = '' add where ($column is null or column = '') statement
-     * If $value != '' add where $column = $value statement
+     * If $value != '' add where $column = $value statement.
      *
      * @param Builder $query
      * @param string|array $column
@@ -45,10 +43,10 @@ trait WherePlusTrait
                 $query->whereOrEmptyOrNull($where_col, $where_val, $ignore);
             }
         } else {
-            if (!is_null($ignore) && $value != $ignore) {
+            if (! is_null($ignore) && $value != $ignore) {
                 if ($value == '') {
                     $query->where(function ($query) use ($column) {
-                        /** @var Builder $query */
+                        /* @var Builder $query */
                         $query->where($column, '')
                             ->orWhereNull($column);
                     });
@@ -62,7 +60,7 @@ trait WherePlusTrait
     }
 
     /**
-     * Scope a query to only include records where $value in $column
+     * Scope a query to only include records where $value in $column.
      *
      * @param Builder $query
      * @param string $column
@@ -71,11 +69,11 @@ trait WherePlusTrait
      */
     public function scopeWhereInColumn(Builder $query, $column, $value)
     {
-        return $query->whereRaw('CONCAT(\',\', ' . $this->addTicks($column) . ', \',\') LIKE \'%,' . $value . ',%\'');
+        return $query->whereRaw('CONCAT(\',\', '.$this->addTicks($column).', \',\') LIKE \'%,'.$value.',%\'');
     }
 
     /**
-     * Scope a query to exclude records where $value in $column
+     * Scope a query to exclude records where $value in $column.
      *
      * @param Builder $query
      * @param string $column
@@ -85,12 +83,12 @@ trait WherePlusTrait
     public function scopeWhereNotInColumn(Builder $query, $column, $value)
     {
         return $query->whereRaw(
-            'CONCAT(\',\', ' . $this->addTicks($column) . ', \',\') NOT LIKE \'%,' . $value . ',%\''
+            'CONCAT(\',\', '.$this->addTicks($column).', \',\') NOT LIKE \'%,'.$value.',%\''
         );
     }
 
     /**
-     * Scope a query to only include records where $column starts with $value
+     * Scope a query to only include records where $column starts with $value.
      *
      * @param Builder $query
      * @param string $column
@@ -99,11 +97,11 @@ trait WherePlusTrait
      */
     public function scopeWhereStarts(Builder $query, $column, $value)
     {
-        return $query->where($column, 'LIKE', $value . '%');
+        return $query->where($column, 'LIKE', $value.'%');
     }
 
     /**
-     * Scope a query to only include records where $column doesn't start with $value
+     * Scope a query to only include records where $column doesn't start with $value.
      *
      * @param Builder $query
      * @param string $column
@@ -112,11 +110,11 @@ trait WherePlusTrait
      */
     public function scopeWhereNotStarts(Builder $query, $column, $value)
     {
-        return $query->where($column, 'NOT LIKE', $value . '%');
+        return $query->where($column, 'NOT LIKE', $value.'%');
     }
 
     /**
-     * Scope a query to only include records where $column ends with $value
+     * Scope a query to only include records where $column ends with $value.
      *
      * @param Builder $query
      * @param string $column
@@ -125,11 +123,11 @@ trait WherePlusTrait
      */
     public function scopeWhereEnds(Builder $query, $column, $value)
     {
-        return $query->where($column, 'LIKE', '%' . $value);
+        return $query->where($column, 'LIKE', '%'.$value);
     }
 
     /**
-     * Scope a query to only include records where $column doesn't end with $value
+     * Scope a query to only include records where $column doesn't end with $value.
      *
      * @param Builder $query
      * @param string $column
@@ -138,11 +136,11 @@ trait WherePlusTrait
      */
     public function scopeWhereNotEnds(Builder $query, $column, $value)
     {
-        return $query->where($column, 'NOT LIKE', '%' . $value);
+        return $query->where($column, 'NOT LIKE', '%'.$value);
     }
 
     /**
-     * Scope a query to only include records where $column contains $value
+     * Scope a query to only include records where $column contains $value.
      *
      * @param Builder $query
      * @param string $column
@@ -151,11 +149,11 @@ trait WherePlusTrait
      */
     public function scopeWhereContains(Builder $query, $column, $value)
     {
-        return $query->where($column, 'LIKE', '%' . $value . '%');
+        return $query->where($column, 'LIKE', '%'.$value.'%');
     }
 
     /**
-     * Scope a query to only include records where $column doesn't contain $value
+     * Scope a query to only include records where $column doesn't contain $value.
      *
      * @param Builder $query
      * @param string $column
@@ -164,6 +162,6 @@ trait WherePlusTrait
      */
     public function scopeWhereNotContains(Builder $query, $column, $value)
     {
-        return $query->where($column, 'NOT LIKE', '%' . $value . '%');
+        return $query->where($column, 'NOT LIKE', '%'.$value.'%');
     }
 }

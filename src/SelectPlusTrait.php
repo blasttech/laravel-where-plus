@@ -2,19 +2,17 @@
 
 namespace Blasttech\WherePlus;
 
-use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Query\Builder;
 
 /**
- * Trait SelectPlusTrait
+ * Trait SelectPlusTrait.
  *
  * @method Builder addSum(string|string[] $fields)
  * @method Builder addCount(string|string[] $fields)
  * @method Builder addMax(string|string[] $fields)
  * @method Builder addMin(string|string[] $fields)
  * @method Builder addAvg(string|string[] $fields)
- *
- * @package Blasttech\WherePlus
  */
 trait SelectPlusTrait
 {
@@ -25,7 +23,7 @@ trait SelectPlusTrait
      */
     public function scopeAddSum($query, $fields)
     {
-        if (!is_array($fields)) {
+        if (! is_array($fields)) {
             $fields = [$fields];
         }
 
@@ -43,7 +41,7 @@ trait SelectPlusTrait
      */
     public function scopeAddCount($query, $fields)
     {
-        if (!is_array($fields)) {
+        if (! is_array($fields)) {
             $fields = [$fields];
         }
 
@@ -61,7 +59,7 @@ trait SelectPlusTrait
      */
     public function scopeAddMax($query, $fields)
     {
-        if (!is_array($fields)) {
+        if (! is_array($fields)) {
             $fields = [$fields];
         }
 
@@ -79,7 +77,7 @@ trait SelectPlusTrait
      */
     public function scopeAddMin($query, $fields)
     {
-        if (!is_array($fields)) {
+        if (! is_array($fields)) {
             $fields = [$fields];
         }
 
@@ -97,7 +95,7 @@ trait SelectPlusTrait
      */
     public function scopeAddAvg($query, $fields)
     {
-        if (!is_array($fields)) {
+        if (! is_array($fields)) {
             $fields = [$fields];
         }
 
