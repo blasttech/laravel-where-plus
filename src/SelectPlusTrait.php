@@ -21,6 +21,7 @@ trait SelectPlusTrait
     /**
      * @param Builder $query
      * @param string|string[] $fields
+     *
      * @return Builder
      */
     public function scopeAddSum($query, $fields)
@@ -39,6 +40,7 @@ trait SelectPlusTrait
     /**
      * @param Builder $query
      * @param string|string[] $fields
+     *
      * @return Builder
      */
     public function scopeAddCount($query, $fields)
@@ -57,6 +59,7 @@ trait SelectPlusTrait
     /**
      * @param Builder $query
      * @param string|string[] $fields
+     *
      * @return Builder
      */
     public function scopeAddMax($query, $fields)
@@ -75,6 +78,7 @@ trait SelectPlusTrait
     /**
      * @param Builder $query
      * @param string|string[] $fields
+     *
      * @return Builder
      */
     public function scopeAddMin($query, $fields)
@@ -93,6 +97,7 @@ trait SelectPlusTrait
     /**
      * @param Builder $query
      * @param string|string[] $fields
+     *
      * @return Builder
      */
     public function scopeAddAvg($query, $fields)

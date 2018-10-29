@@ -17,6 +17,7 @@ trait WherePlusTrait
      * Add ticks to a table and column
      *
      * @param string $column
+     *
      * @return string
      */
     private function addTicks($column)
@@ -36,6 +37,7 @@ trait WherePlusTrait
      * @param string|array $column
      * @param string $value
      * @param string $ignore - if value = ignore, don't search on this column
+     *
      * @return \Illuminate\Database\Query\Builder
      */
     public function scopeWhereOrEmptyOrNull(Builder $query, $column, $value = '', $ignore = null)
@@ -48,7 +50,7 @@ trait WherePlusTrait
             if (!is_null($ignore) && $value != $ignore) {
                 if ($value == '') {
                     $query->where(function ($query) use ($column) {
-                        /** @var Builder $query */
+                        /* @var Builder $query */
                         $query->where($column, '')
                             ->orWhereNull($column);
                     });
@@ -67,6 +69,7 @@ trait WherePlusTrait
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereInColumn(Builder $query, $column, $value)
@@ -80,6 +83,7 @@ trait WherePlusTrait
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereNotInColumn(Builder $query, $column, $value)
@@ -95,6 +99,7 @@ trait WherePlusTrait
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereStarts(Builder $query, $column, $value)
@@ -108,6 +113,7 @@ trait WherePlusTrait
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereNotStarts(Builder $query, $column, $value)
@@ -121,6 +127,7 @@ trait WherePlusTrait
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereEnds(Builder $query, $column, $value)
@@ -134,6 +141,7 @@ trait WherePlusTrait
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereNotEnds(Builder $query, $column, $value)
@@ -147,6 +155,7 @@ trait WherePlusTrait
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereContains(Builder $query, $column, $value)
@@ -160,6 +169,7 @@ trait WherePlusTrait
      * @param Builder $query
      * @param string $column
      * @param string $value
+     *
      * @return Builder
      */
     public function scopeWhereNotContains(Builder $query, $column, $value)
