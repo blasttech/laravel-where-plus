@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\DB;
 /**
  * Trait SelectPlusTrait
  *
- * @method static addSum(string $fields, string $alias)
- * @method static addCount(string $fields, string $alias)
- * @method static addMax(string $fields, string $alias)
- * @method static addMin(string $fields, string $alias)
- * @method static addAvg(string $fields, string $alias)
+ * @method $this addSum(string $fields, string $alias = '')
+ * @method $this addCount(string $fields, string $alias = '')
+ * @method $this addMax(string $fields, string $alias = '')
+ * @method $this addMin(string $fields, string $alias = '')
+ * @method $this addAvg(string $fields, string $alias = '')
  *
  * @package Blasttech\WherePlus
  */
@@ -119,22 +119,5 @@ trait SelectPlusTrait
     public function scopeAddAvg($query, $field, $alias = '')
     {
         return $this->addAggregation($query, 'AVG', $field, $alias);
-    }
-
-    /**
-     * Allow group by index
-     *
-     * @param static|Builder $query
-     * @param int|int[] $index
-     *
-     * @return static
-     */
-    public function scopeGroupByIndex($query, ...$index)
-    {
-        if (!is_array($index)) {
-            $index = [$index];
-        }
-
-        return $query->groupBy(DB::raw(implode(',', $index)));
     }
 }
