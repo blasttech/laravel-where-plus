@@ -71,12 +71,34 @@ In SQL, this would be the equivalent of:
 Calls::make()
   ->select(['calltype'])
   ->addCount('id')
-  ->addSum(['seconds', 'charge'])
-  ->groupBy(['calltype']);
+  ->addSum('seconds')
+  ->addSum('seconds', 'seconds2')
+  ->groupBy('calltype');
 ```
 In SQL, this would be the equivalent of:
 ```sql
   select calltype, count(id), sum(seconds), sum(charge) 
     from calls 
    group by calltype
+```
+
+## Group and Order
+
+### Available scopes
+- groupByIndex
+- orderByIndex
+
+### Example
+```php
+Calls::make()
+  ->select(['calltype', 'description'])
+  ->addSum('charge')
+  ->groupByIndex(1, 2);
+  ->orderByIndex(1);
+```
+```sql
+  select calltype, description, sum(charge) 
+    from calls 
+   group by 1, 2
+   order by 1
 ```
