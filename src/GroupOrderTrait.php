@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\DB;
 /**
  * Trait GroupOrderTrait
  *
- * @method static groupByIndex(string ...$index)
- * @method static orderByIndex(string ...$index)
+ * @method $this groupByIndex(string ...$index)
+ * @method $this orderByIndex(string ...$index)
  *
  * @package Blasttech\WherePlus
  */
