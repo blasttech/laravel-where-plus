@@ -41,7 +41,7 @@ trait SelectPlusTrait
             if (empty($alias)) {
                 $alias = $field;
                 if (strpos($field, '.') !== false) {
-                    list(,$alias) = explode('.', $field);
+                    list(, $alias) = explode('.', $field);
                 }
             }
         }
@@ -126,6 +126,7 @@ trait SelectPlusTrait
      *
      * @param static|Builder $query
      * @param int|int[] $index
+     *
      * @return static
      */
     public function scopeGroupByIndex($query, ...$index)
