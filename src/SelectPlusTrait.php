@@ -9,22 +9,41 @@ use Illuminate\Support\Facades\DB;
 /**
  * Trait SelectPlusTrait
  *
- * @method $this addSum(string|string[] $fields)
- * @method $this addCount(string|string[] $fields)
- * @method $this addMax(string|string[] $fields)
- * @method $this addMin(string|string[] $fields)
- * @method $this addAvg(string|string[] $fields)
+ * @method static addSum(string $fields, string $alias)
+ * @method static addCount(string $fields, string $alias)
+ * @method static addMax(string $fields, string $alias)
+ * @method static addMin(string $fields, string $alias)
+ * @method static addAvg(string $fields, string $alias)
  *
  * @package Blasttech\WherePlus
  */
 trait SelectPlusTrait
 {
+    /**
+     * Common method for adding aggregation to the query
+     *
+     * @param static|Builder $query
+     * @param string $op
+     * @param string $field
+     * @param string $alias
+     *
+     * @return static
+     */
     protected function addAggregation($query, $op, $field, $alias)
     {
-        $alias = $alias ?: $field;
-
         if ($field instanceof Expression) {
             $field = $field->getValue();
+            if (empty($alias)) {
+                $alias = preg_replace('/\W*/', '', $field);
+            }
+        } else {
+            //When passed field use table alias and alias is empty we need to explode
+            if (empty($alias)) {
+                $alias = $field;
+                if (strpos($field, '.') !== false) {
+                    list(,$alias) = explode('.', $field);
+                }
+            }
         }
 
         $query->addSelect(DB::raw("{$op}({$field}) as {$alias}"));
@@ -35,11 +54,11 @@ trait SelectPlusTrait
     /**
      * Add sum to the query
      *
-     * @param $this $query
+     * @param static|Builder $query
      * @param string $field
      * @param string $alias
      *
-     * @return $this
+     * @return static
      */
     public function scopeAddSum($query, $field, $alias = '')
     {
@@ -49,11 +68,11 @@ trait SelectPlusTrait
     /**
      * Add count to the query
      *
-     * @param Builder $query
+     * @param static|Builder $query
      * @param string $field
      * @param string $alias
      *
-     * @return $this
+     * @return static
      */
     public function scopeAddCount($query, $field, $alias = '')
     {
@@ -63,11 +82,11 @@ trait SelectPlusTrait
     /**
      * Add max to the query
      *
-     * @param Builder $query
+     * @param static|Builder $query
      * @param string $field
      * @param string $alias
      *
-     * @return $this
+     * @return static
      */
     public function scopeAddMax($query, $field, $alias = '')
     {
@@ -77,11 +96,11 @@ trait SelectPlusTrait
     /**
      * Add min to the query
      *
-     * @param Builder $query
+     * @param static|Builder $query
      * @param string $field
      * @param string $alias
      *
-     * @return $this
+     * @return static
      */
     public function scopeAddMin($query, $field, $alias = '')
     {
@@ -91,14 +110,30 @@ trait SelectPlusTrait
     /**
      * Add avg to the query
      *
-     * @param Builder $query
+     * @param static|Builder $query
      * @param string $field
      * @param string $alias
      *
-     * @return $this
+     * @return static
      */
     public function scopeAddAvg($query, $field, $alias = '')
     {
         return $this->addAggregation($query, 'AVG', $field, $alias);
+    }
+
+    /**
+     * Allow group by index
+     *
+     * @param static|Builder $query
+     * @param int|int[] $index
+     * @return static
+     */
+    public function scopeGroupByIndex($query, ...$index)
+    {
+        if (!is_array($index)) {
+            $index = [$index];
+        }
+
+        return $query->groupBy(DB::raw(implode(',', $index)));
     }
 }
