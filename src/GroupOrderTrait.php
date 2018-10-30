@@ -20,6 +20,7 @@ trait GroupOrderTrait
      *
      * @param static|Builder $query
      * @param int|int[] $index
+     *
      * @return static
      */
     public function scopeGroupByIndex($query, ...$index)
@@ -36,6 +37,7 @@ trait GroupOrderTrait
      *
      * @param static|Builder $query
      * @param int|int[] $index
+     *
      * @return static
      */
     public function scopeOrderByIndex($query, ...$index)
