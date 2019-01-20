@@ -196,11 +196,12 @@ trait WherePlusTrait
      * @param null $operator
      * @param null $value
      * @param string $boolean
+     *
      * @return $this
      */
     public function scopeWhereIfNull($query, $column, $ifNull, $operator = null, $value = null, $boolean = 'and')
     {
-        $bind = (! $ifNull instanceof Expression);
+        $bind = (!$ifNull instanceof Expression);
 
         return $query->where(
             \DB::raw('IFNULL(' . $column . ', ' . ($bind ? '?' : $ifNull) . ')'),
