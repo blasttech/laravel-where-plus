@@ -55,10 +55,10 @@ trait WherePlusTrait
             foreach ($column as $where_col => $where_val) {
                 $query->whereOrEmptyOrNull($where_col, $where_val, $ignore);
             }
-            
+
             return $query;
         }
-        
+
         if (!is_null($ignore) && $value != $ignore) {
             if ($value == '') {
                 return $query->where(function ($query) use ($column) {
@@ -67,7 +67,7 @@ trait WherePlusTrait
                         ->orWhereNull($column);
                 });
             }
-                
+
             $query->where($column, $value);
         }
 
@@ -198,11 +198,12 @@ trait WherePlusTrait
      * @param null $operator
      * @param null $value
      * @param string $boolean
+     *
      * @return $this
      */
     public function scopeWhereIfNull($query, $column, $ifNull, $operator = null, $value = null, $boolean = 'and')
     {
-        $bind = (! $ifNull instanceof Expression);
+        $bind = (!$ifNull instanceof Expression);
 
         return $query->where(
             \DB::raw('IFNULL(' . $column . ', ' . ($bind ? '?' : $ifNull) . ')'),
