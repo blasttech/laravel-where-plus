@@ -5,6 +5,7 @@ Functions:
 * whereOrEmptyOrNull($column, $value, $ignore)
 * whereInColumn($column, $value)
 * whereNotInColumn($column, $value)
+* whereIfNull($column, $ifNull, $operator = null, $value = null, $boolean = 'and')
 
 ## whereOrEmptyOrNull
 This adds a where condition for when a $column should be equal to $value, but not equal to a $ignore
@@ -55,6 +56,18 @@ For example:
 In SQL, this would be the equivalent of:
 ```sql
   WHERE CONCAT(',', `Country`, ',') NOT LIKE '%,Australia,%'
+```
+
+## whereIfNull($column, $ifNull, $operator = null, $value = null, $boolean = 'and')
+This adds a where condition with the column wrapped in an SQL 'IFNULL' with the column as the first parameter and $ifNull as the second parameter. 
+
+For example:
+```php
+  $query->whereIfNull('Country', 'Australia', '=', 'New Zealand');
+```
+In SQL, this would be the equivalent of:
+```sql
+  WHERE IFNULL(`Country`, 'Australia') = 'New Zealand'
 ```
 
 ## Aggregates
