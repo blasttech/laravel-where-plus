@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Builder;
  * @method $this whereNotEnds(string $column, string $value)
  * @method $this whereContains(string $column, string $value)
  * @method $this whereNotContains(string $column, string $value)
+ * @method $this whereIfNull($column, $ifNull, $operator = null, $value = null, $boolean = 'and')
  *
  * @package Blasttech\WherePlus
  */
@@ -183,5 +184,29 @@ trait WherePlusTrait
     public function scopeWhereNotContains(Builder $query, $column, $value)
     {
         return $query->where($column, 'NOT LIKE', '%' . $value . '%');
+    }
+
+    /**
+     * Scope a query to include an IFNULL in a where statement
+     * $ifNull will be the result if $column is null
+     *
+     * @param Builder $query
+     * @param string $column
+     * @param string $ifNull
+     * @param null $operator
+     * @param null $value
+     * @param string $boolean
+     * @return $this
+     */
+    public function scopeWhereIfNull($query, $column, $ifNull, $operator = null, $value = null, $boolean = 'and')
+    {
+        $bind = (! $ifNull instanceof Expression);
+
+        return $query->where(
+            \DB::raw('IFNULL(' . $column . ', ' . ($bind ? '?' : $ifNull) . ')'),
+            $operator,
+            ($bind ? [$ifNull, $value] : $value),
+            $boolean
+        );
     }
 }
