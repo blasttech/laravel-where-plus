@@ -33,9 +33,9 @@ trait WherePlusTrait
     {
         if (preg_match('/^[0-9a-zA-Z\.]*$/', $column)) {
             return '`' . str_replace(['`', '.'], ['', '`.`'], $column) . '`';
-        } else {
-            return $column;
         }
+
+        return $column;
     }
 
     /**
@@ -55,18 +55,20 @@ trait WherePlusTrait
             foreach ($column as $where_col => $where_val) {
                 $query->whereOrEmptyOrNull($where_col, $where_val, $ignore);
             }
-        } else {
-            if (!is_null($ignore) && $value != $ignore) {
-                if ($value == '') {
-                    $query->where(function ($query) use ($column) {
-                        /* @var Builder $query */
-                        $query->where($column, '')
-                            ->orWhereNull($column);
-                    });
-                } else {
-                    $query->where($column, $value);
-                }
+            
+            return $query;
+        }
+        
+        if (!is_null($ignore) && $value != $ignore) {
+            if ($value == '') {
+                return $query->where(function ($query) use ($column) {
+                    /* @var Builder $query */
+                    $query->where($column, '')
+                        ->orWhereNull($column);
+                });
             }
+                
+            $query->where($column, $value);
         }
 
         return $query;
@@ -192,7 +194,7 @@ trait WherePlusTrait
      *
      * @param Builder $query
      * @param string $column
-     * @param string $ifNull
+     * @param string|Expression $ifNull
      * @param null $operator
      * @param null $value
      * @param string $boolean
