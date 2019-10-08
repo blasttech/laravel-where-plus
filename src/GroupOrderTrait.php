@@ -2,7 +2,7 @@
 
 namespace Blasttech\WherePlus;
 
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -18,10 +18,10 @@ trait GroupOrderTrait
     /**
      * Allow group by index
      *
-     * @param static|Builder $query
+     * @param static|$this|Builder $query
      * @param int|int[] $index
      *
-     * @return static
+     * @return static|$this|Builder
      */
     public function scopeGroupByIndex($query, ...$index)
     {
@@ -35,10 +35,10 @@ trait GroupOrderTrait
     /**
      * Allow order by index
      *
-     * @param static|Builder $query
+     * @param static|$this|Builder $query
      * @param int|int[] $index
      *
-     * @return static
+     * @return static|$this|Builder
      */
     public function scopeOrderByIndex($query, ...$index)
     {

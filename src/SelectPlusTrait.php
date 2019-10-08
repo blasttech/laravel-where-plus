@@ -2,7 +2,7 @@
 
 namespace Blasttech\WherePlus;
 
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Facades\DB;
 
@@ -20,14 +20,28 @@ use Illuminate\Support\Facades\DB;
 trait SelectPlusTrait
 {
     /**
+     * Add sum to the query
+     *
+     * @param static|$this|Builder $query
+     * @param string $field
+     * @param string $alias
+     *
+     * @return static|$this|Builder
+     */
+    public function scopeAddSum($query, $field, $alias = '')
+    {
+        return $this->addAggregation($query, 'SUM', $field, $alias);
+    }
+
+    /**
      * Common method for adding aggregation to the query
      *
-     * @param static|Builder $query
+     * @param static|$this|Builder $query
      * @param string $op
      * @param string $field
      * @param string $alias
      *
-     * @return static
+     * @return static|$this|Builder
      */
     protected function addAggregation($query, $op, $field, $alias)
     {
@@ -52,27 +66,13 @@ trait SelectPlusTrait
     }
 
     /**
-     * Add sum to the query
-     *
-     * @param static|Builder $query
-     * @param string $field
-     * @param string $alias
-     *
-     * @return static
-     */
-    public function scopeAddSum($query, $field, $alias = '')
-    {
-        return $this->addAggregation($query, 'SUM', $field, $alias);
-    }
-
-    /**
      * Add count to the query
      *
-     * @param static|Builder $query
+     * @param static|$this|Builder $query
      * @param string $field
      * @param string $alias
      *
-     * @return static
+     * @return static|$this|Builder
      */
     public function scopeAddCount($query, $field, $alias = '')
     {
@@ -82,11 +82,11 @@ trait SelectPlusTrait
     /**
      * Add max to the query
      *
-     * @param static|Builder $query
+     * @param static|$this|Builder $query
      * @param string $field
      * @param string $alias
      *
-     * @return static
+     * @return static|$this|Builder
      */
     public function scopeAddMax($query, $field, $alias = '')
     {
@@ -96,11 +96,11 @@ trait SelectPlusTrait
     /**
      * Add min to the query
      *
-     * @param static|Builder $query
+     * @param static|$this|Builder $query
      * @param string $field
      * @param string $alias
      *
-     * @return static
+     * @return static|$this|Builder
      */
     public function scopeAddMin($query, $field, $alias = '')
     {
@@ -110,11 +110,11 @@ trait SelectPlusTrait
     /**
      * Add avg to the query
      *
-     * @param static|Builder $query
+     * @param static|$this|Builder $query
      * @param string $field
      * @param string $alias
      *
-     * @return static
+     * @return static|$this|Builder
      */
     public function scopeAddAvg($query, $field, $alias = '')
     {
